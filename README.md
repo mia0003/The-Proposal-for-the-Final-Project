@@ -1,7 +1,7 @@
 # The-Proposal-for-the-Final-Project
 
 ## Repository
-<Link to your project's public GitHub respository>
+<Link to your project's public GitHub respository> -> https://github.com/mia0003/The-Proposal-for-the-Final-Project.git
 
 ## Description
 This final project will be a game in which the player is given a grocery list from which they have to obtain the items. They will face many obstacles in the grocery store, in which they have to decide how to overcome them. This game will teach players how to be efficient in the grocery store and how to make the ultimate decision to move on to the next stage of the game.
