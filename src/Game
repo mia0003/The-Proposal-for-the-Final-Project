@@ -4,11 +4,11 @@ def main():
     intro()
 # Calls Intro 
 def intro():
-    players_name = input("What is your name player?")
-    print(f"Hello,{players_name}! Welcome to the Grocery List Simulator.")
-    players_given_name = input("For this game to start... may you provide me ANY given name (other than yourself of course)?")
+    players_name = input("What is your name player? ")
+    print(f"Hello, {players_name}! Welcome to the Grocery List Simulator.")
+    players_given_name = input("May I ask of you to provide me another name (preferably someone you're familiar with)? ")
     
-    print(f"{players_given_name}invites you over and offers to make dinner for you.")
+    print(f"{players_given_name} invites you over and offers to make dinner for you.")
     print("Uh oh! In the midst of their cooking, they tell you they are missing a few ingredients.")
     print("As a good friend, you offer to go to the grocery store to obtain the missing items!")
 
@@ -19,7 +19,7 @@ def intro():
     print("They're missing the following items:")
     for item in items_needed:
         print(f" - {item}")
-# Introduction to game + names meal + gives list to obtain
+# Introduction to game + aske of players name & friends name + names meal + gives list to obtain
 
 def pick_random_meal():
     meals = ["TACOS", "HAMBURGERS", "SPAGHETTI"]
