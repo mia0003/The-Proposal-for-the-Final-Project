@@ -2,7 +2,7 @@ import random
 
 def main():
     intro()
-# Intro 
+# Calls Intro 
 def intro():
     print("Your friend invites you over and offers to make dinner for you.")
     print("Uh oh! In the midst of their cooking, they tell you they are missing a few ingredients.")
@@ -15,11 +15,13 @@ def intro():
     print("They're missing the following items:")
     for item in items_needed:
         print(f" - {item}")
+# Introduction to game + names meal + gives list to obtain
 
 def pick_random_meal():
     meals = ["TACOS", "HAMBURGERS", "SPAGHETTI"]
     idx = random.randrange(len(meals))
     return meals[idx]
+# Picks random meal
 
 def given_list(meal):
     meal_items = {
@@ -29,7 +31,7 @@ def given_list(meal):
     }
 
     return meal_items.get(meal, [])
-    
+# Calls list for the given meal chosen
 
 
     
