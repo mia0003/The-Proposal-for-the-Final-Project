@@ -28,7 +28,7 @@ def given_list(meal):
         "SPAGHETTI": ["Marinara Sauce", "Spaghetti Noodles", "Parmesan Cheese", "Garlic Bread", "Can of Peas"]
     }
 
-    return meal_items(meal, [])
+    return meal_items.get(meal, [])
     
 
 
