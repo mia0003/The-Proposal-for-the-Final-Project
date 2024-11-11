@@ -4,7 +4,11 @@ def main():
     intro()
 # Calls Intro 
 def intro():
-    print("Your friend invites you over and offers to make dinner for you.")
+    players_name = input("What is your name player?")
+    print(f"Hello,{players_name}! Welcome to the Grocery List Simulator.")
+    players_given_name = input("For this game to start... may you provide me ANY given name (other than yourself of course)?")
+    
+    print(f"{players_given_name}invites you over and offers to make dinner for you.")
     print("Uh oh! In the midst of their cooking, they tell you they are missing a few ingredients.")
     print("As a good friend, you offer to go to the grocery store to obtain the missing items!")
 
