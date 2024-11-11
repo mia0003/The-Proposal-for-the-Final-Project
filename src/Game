@@ -2,6 +2,8 @@ import random
 
 def main():
     intro()
+    if __name__ == "__main__":
+        main()
 # Calls Intro 
 def intro():
     players_name = input("What is your name player? ")
@@ -19,6 +21,14 @@ def intro():
     print("They're missing the following items:")
     for item in items_needed:
         print(f" - {item}")
+
+    if meal == "TACOS":
+        TACO_path()
+    elif meal == "HAMBURGERS":
+        HAMBURGER_path()
+    elif meal == "SPAGHETTI":
+        SPAGHETTI_path()
+
 # Introduction to game + aske of players name & friends name + names meal + gives list to obtain
 
 def pick_random_meal():
@@ -37,18 +47,20 @@ def given_list(meal):
     return meal_items.get(meal, [])
 # Calls list for the given meal chosen
 
+def TACO_path():
+    print("You have arrived at the Python Grocery Store!")
+    print("As you head inside the store, you see TWO options in which to carry your belongings.")
+    print("The following options are:")
+    print("1. A Basket \n 2. A Cart")
+
+def HAMBURGER_path():
+
+def SPAGHETTI_path():
 
     
+
+
+
+
     
 
-
-
-    
-
-
-
-
-
-
-if __name__ == "__main__":
-    main()
