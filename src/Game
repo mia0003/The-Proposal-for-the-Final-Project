@@ -7,14 +7,29 @@ def intro():
     print("Your friend invites you over and offers to make dinner for you.")
     print("Uh oh! In the midst of their cooking, they tell you they are missing a few ingredients.")
     print("As a good friend, you offer to go to the grocery store to obtain the missing items!")
-    # Calling meal
+
     meal = pick_random_meal()
-    print("You're friend was in the middle of making...{meal}")
-# what meal and items to obtain
+    print(f"You're friend was in the middle of making...{meal}")
+
+    items_needed = given_list(meal)
+    print("They're missing the following items:")
+    for item in items_needed:
+        print(f" - {item}")
+
 def pick_random_meal():
-    meals = ["tacos", "hamburgers", "spaghetti"]
+    meals = ["TACOS", "HAMBURGERS", "SPAGHETTI"]
     idx = random.randrange(len(meals))
     return meals[idx]
+
+def given_list(meal):
+    meal_items = {
+        "TACOS": ["Rice", "Shredded Cheese", "lettuce", "Beans", "Tortillas", "Avocados"],
+        "HAMBURGERS": ["French Fries", "Hamburger Buns", "Ground Beef", "Cheese Slices"],
+        "SPAGHETTI": ["Marinara Sauce", "Spaghetti Noodles", "Parmesan Cheese", "Garlic Bread", "Can of Peas"]
+    }
+
+    return meal_items(meal, [])
+    
 
 
     
