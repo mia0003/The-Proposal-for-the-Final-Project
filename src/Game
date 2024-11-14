@@ -2,13 +2,11 @@ import random
 
 def main():
     intro()
-    if __name__ == "__main__":
-        main()
 # Calls Intro 
 def intro():
-    players_name = input("What is your name player? ")
+    players_name = input("Input Name 1: ")
     print(f"Hello, {players_name}! Welcome to the Grocery List Simulator.")
-    players_given_name = input("May I ask of you to provide me another name (preferably someone you're familiar with)? ")
+    players_given_name = input("Input Name 2: ")
     
     print(f"{players_given_name} invites you over and offers to make dinner for you.")
     print("Uh oh! In the midst of their cooking, they tell you they are missing a few ingredients.")
@@ -21,13 +19,15 @@ def intro():
     print("They're missing the following items:")
     for item in items_needed:
         print(f" - {item}")
-
+    
     if meal == "TACOS":
-        TACO_path()
-    elif meal == "HAMBURGERS":
-        HAMBURGER_path()
-    elif meal == "SPAGHETTI":
-        SPAGHETTI_path()
+        tacos_story()
+    if meal == "HAMBURGERS":
+        hamburgers_story()
+    if meal == "SPAGHETTI":
+        spaghetti_story()
+
+    
 
 # Introduction to game + aske of players name & friends name + names meal + gives list to obtain
 
@@ -47,15 +47,32 @@ def given_list(meal):
     return meal_items.get(meal, [])
 # Calls list for the given meal chosen
 
-def TACO_path():
-    print("You have arrived at the Python Grocery Store!")
-    print("As you head inside the store, you see TWO options in which to carry your belongings.")
-    print("The following options are:")
-    print("1. A Basket \n 2. A Cart")
+def tacos_story():
+    print("There are 3 grocery stores nearby you. \n They are: \n 1. Oates \n 2. Smiths \n 3. Sacred")
+    designated_store = input("Which store do you decide to go to?")
+    
+    if designated_store == "1":
+        print("You have arrived at Oates!")
+    elif designated_store == "2":
+        print("You have arrived at Smiths!")
+    elif designated_store == "3":
+        print("You have arrived at Sacred!")
+    
+def hamburgers_story():
+    print("There are 2 grocery stores nearby you. \n They are: \n 1. Franks \n 2. Jacksons")
+    desginated_store = input("Which store do you decide to go to?")
 
-def HAMBURGER_path():
+    if desginated_store == "1":
+        print("You have arrived at Franks!")
+    elif desginated_store == "2":
+        print("You have arrived at Jacksons")
+    
 
-def SPAGHETTI_path():
+if __name__ == "__main__":
+    main()
+
+
+
 
     
 
