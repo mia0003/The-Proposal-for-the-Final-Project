@@ -7,24 +7,10 @@ def intro():
     print("Welcome to **Dinner Disaster: Ingredient Hunt**")
     print("Your friend offers to make dinner for you, and upon arriving to the 'said' meal, they tell you they're running behind on making the meal, as they've forgotten the ingredients, or rather all the ingredients.")
     print("As a good friend, you offer to go to the grocery store and obtain the ingredients for the meal your friend was planning on making.")
-    print(f"Your friend was in the middle of making...{meal}")
-    
-    
-    
-    
-    players_name = input("Input Name 1: ")
-    print(f"Hello, {players_name}! Welcome to the Grocery List Simulator.")
-    players_given_name = input("Input Name 2: ")
-    
-    print(f"{players_given_name} invites you over and offers to make dinner for you.")
-    print("Uh oh! In the midst of their cooking, they tell you they are missing a few ingredients.")
-    print("As a good friend, you offer to go to the grocery store to obtain the missing items!")
-
     meal = pick_random_meal()
-    print(f"You're friend was in the middle of making...{meal}")
-
+    print(f"Your friend was planning on making...{meal}")
     items_needed = given_list(meal)
-    print("They're missing the following items:")
+    print("Ingredients needed for the meal:")
     for item in items_needed:
         print(f" - {item}")
     
@@ -34,7 +20,7 @@ def intro():
         hamburgers_story()
     if meal == "SPAGHETTI":
         spaghetti_story()
-# Introduction to game + aske of players name & friends name + names meal + gives list to obtain
+# Introduction to game + provides meal & ingredients
 def pick_random_meal():
     meals = ["TACOS", "HAMBURGERS", "SPAGHETTI"]
     idx = random.randrange(len(meals))
@@ -42,39 +28,39 @@ def pick_random_meal():
 # Picks random meal
 def given_list(meal):
     meal_items = {
-        "TACOS": ["Rice", "Shredded Cheese", "lettuce", "Beans", "Tortillas", "Avocados"],
+        "TACOS": ["Rice", "Shredded Cheese", "lettuce", "Beans", "Tortillas", "Ground Beef", "Avocados"],
         "HAMBURGERS": ["French Fries", "Hamburger Buns", "Ground Beef", "Cheese Slices"],
-        "SPAGHETTI": ["Marinara Sauce", "Spaghetti Noodles", "Parmesan Cheese", "Garlic Bread", "Can of Peas"]
+        "SPAGHETTI": ["Marinara Sauce", "Spaghetti Noodles", "Parmesan Cheese", "Garlic Bread", "Turkey"]
     }
 
     return meal_items.get(meal, [])
 # Calls list for the given meal chosen
 def tacos_story():
-    print("There are 3 grocery stores nearby you. \n They are: \n 1. Oates \n 2. Smiths \n 3. Sacred")
-    designated_store = input("Which store do you decide to go to? ")
-    
-    if designated_store == "1" or "Oates" or "oates":
-        print("You have arrived at Oates!")
-        oates_story()
-    elif designated_store == "2" or "Smiths" or "smiths":
-        print("You have arrived at Smiths!")
-        
-    elif designated_store == "3" or "Sacred" or "sacred":
-        print("You have arrived at Sacred!")  
+    print("Now, which grocery store should you go to?")
+    print("There seems to be three nearby you. \n Where should you go? \n 1. Oates \n 2. Smiths \n 3. Sacred")
+    designated_store = input("Please type the number of your choice: ")
+    if designated_store == "1":
+        print("You chose: Oates!")
+    elif designated_store == "2":
+        print("You chose: Smiths!")
+    elif designated_store == "3":
+        print("You chose: Sacred!")  
         
 #Picks which store to heads towards (3)
 def hamburgers_story():
-    print("There are is only ONE grocery store nearby you. \n Which is: \n Franks")
-    print("You arrived at Franks!")
+    print("Now, which grocery store should you go to?")
+    print("...?")
+    print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
+    print("Franks it is!")
 #Picks which store to heads towards (1)
 def spaghetti_story():
-    print("There are 2 grocery stores nearby you. \n They are: \n 1. Jacksons \n 2. Sundays ")
-    designated_store = input("Which store do you decide to go to? ")
-
-    if designated_store == "1" or "Jacksons" or "jacksons":
-        print("You have arrived at Jacksons!")
-    elif designated_store == "2" or "Sundays" or "sundays":
-        print("You have arrived at Sundays!")
+    print("Now, which grocery store should you go to?")
+    print("There seems to be two nearby you. \n Where should you go? \n 1. Jacksons \n 2. Sundays")
+    designated_store = input("Please type the number of your choice: ")
+    if designated_store == "1":
+        print("You chose: Jacksons!")
+    elif designated_store == "2":
+        print("You chose: Sundays!")
 #Picks which store to heads towards (2)
 def oates_story():
     print("You head inside the store. As you you make your way in, you see a few options to carry your given items...")
