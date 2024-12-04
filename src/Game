@@ -41,17 +41,20 @@ def tacos_story():
     designated_store = input("Please type the number of your choice: ")
     if designated_store == "1":
         print("You chose: Oates!")
+        oates()
     elif designated_store == "2":
         print("You chose: Smiths!")
+        smiths()
     elif designated_store == "3":
-        print("You chose: Sacred!")  
-        
+        print("You chose: Sacred!") 
+        sacred() 
 #Picks which store to heads towards (3)
 def hamburgers_story():
     print("Now, which grocery store should you go to?")
     print("...?")
     print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
     print("Franks it is!")
+    franks()
 #Picks which store to heads towards (1)
 def spaghetti_story():
     print("Now, which grocery store should you go to?")
@@ -59,23 +62,61 @@ def spaghetti_story():
     designated_store = input("Please type the number of your choice: ")
     if designated_store == "1":
         print("You chose: Jacksons!")
+        jacksons()
     elif designated_store == "2":
         print("You chose: Sundays!")
+        sundays()
 #Picks which store to heads towards (2)
-def oates_story():
-    print("You head inside the store. As you you make your way in, you see a few options to carry your given items...")
-    print("The following options are: \n 1. Basket \n 2. Cart \n 3. ...I'll just use my hands")
-    designated_carrying = input("How do you want to collect your items? ")
-
-    if designated_carrying == "1" or "Basket" or "basket":
-        print("You grab a basket!")
-    elif designated_carrying == "2" or "Cart" or "cart":
-        print("You grab a cart!")
-    elif designated_carrying == "3" or "...I'll just use my hands" or "...i'll just use my hands":
-        print("")
-
-
-
+def oates():
+    print("You arrive at the Oates grocery store.")
+    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    hold_item = input("Please type the number of your choice: ")
+    if hold_item == "1":
+        print("You obtain a basket!")
+    elif hold_item == "2":
+        print("You obtain a cart!")
+#Oates Storyline
+def smiths():
+    print("You arrive at the Smiths grocery store.")
+    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    hold_item = input("Please type the number of your choice: ")
+    if hold_item == "1":
+        print("You obtain a basket!")
+    elif hold_item == "2":
+        print("You decide to grab a cart! You make haste to obtain one, as there is only one left.")
+        print("As you're about to get one, a lady pushes you aside and takes the cart for herself. Shocked, you grab a basket instead as there is no time to waste.")
+#Smiths Storyline
+def sacred():
+    print("You arrive at the Sacred grocery store.")
+    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    hold_item = input("Please type the number of your choice: ")
+    if hold_item == "1":
+        print("You obtain a basket!")
+    if hold_item == "2":
+        print("You obtain a cart!")
+#Sacred Storyline
+def franks():
+    print("You arrive at the Franks grocery store.")
+    print("Unfortunately, as you enter the store, you see that there are no options for you to carry your items.")
+    print("Looks like you'll have to make use of your hands...")
+#Franks Storyline
+def jacksons():
+    print("You arrive at the Jackons grocery store.")
+    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    hold_item = input("Please type the number of your choice: ")
+    if hold_item == "1":
+        print("You obtain a basket!")
+    if hold_item == "2":
+        print("You obtain a cart!")
+#Jacksons Storyline
+def sundays():
+    print("You arrive at the Sundays grocery store.")
+    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    hold_item = input("Please type the number of your choice: ")
+    if hold_item == "1":
+        print("You obtain a basket!")
+    if hold_item == "2":
+        print("You obtain a cart!")
 if __name__ == "__main__":
     main()
 
