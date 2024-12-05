@@ -1,18 +1,29 @@
 import random
+import time
+import sys
+def slow_print(text, delay=0.05):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
 
+        if char.isalpha() or char.isdigit():
+            time.sleep(delay)
+        
+#Writes_gameplay
+    print()
 def main():
     intro()
 # Calls Intro 
 def intro():
-    print("Welcome to **Dinner Disaster: Ingredient Hunt**")
-    print("Your friend offers to make dinner for you, and upon arriving to the 'said' meal, they tell you they're running behind on making the meal, as they've forgotten the ingredients, or rather all the ingredients.")
-    print("As a good friend, you offer to go to the grocery store and obtain the ingredients for the meal your friend was planning on making.")
+    slow_print("Welcome to **Dinner Disaster: Ingredient Hunt**")
+    slow_print("Your friend offers to make dinner for you, and upon arriving to the 'said' meal, they tell you they're running behind on making the meal, as they've forgotten the ingredients, or rather all the ingredients.")
+    slow_print("As a good friend, you offer to go to the grocery store and obtain the ingredients for the meal your friend was planning on making.")
     meal = pick_random_meal()
-    print(f"Your friend was planning on making...{meal}")
+    slow_print(f"Your friend was planning on making...{meal}")
     items_needed = given_list(meal)
-    print("Ingredients needed for the meal:")
+    slow_print("Ingredients needed for the meal:")
     for item in items_needed:
-        print(f" - {item}")
+        slow_print(f" - {item}")
     
     if meal == "TACOS":
         tacos_story()
@@ -78,7 +89,9 @@ def tacos_story():
         smiths()
     elif designated_store == "3":
         print("You chose: Sacred!") 
-        sacred() 
+        sacred()
+    ingredients_needed = given_list("TACOS")
+    the_obstacle(ingredients_needed)
 #Picks which store to heads towards (3)
 def hamburgers_story():
     print("Now, which grocery store should you go to?")
@@ -86,6 +99,8 @@ def hamburgers_story():
     print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
     print("Franks it is!")
     franks()
+    ingredients_needed = given_list("HAMBURGERS")
+    the_obstacle(ingredients_needed)
 #Picks which store to heads towards (1)
 def spaghetti_story():
     print("Now, which grocery store should you go to?")
@@ -97,6 +112,8 @@ def spaghetti_story():
     elif designated_store == "2":
         print("You chose: Sundays!")
         sundays()
+        ingredients_needed = given_list("SPAGHETTI")
+        the_obstacle(ingredients_needed)
 #Picks which store to heads towards (2)
 def oates():
     print("You arrive at the Oates grocery store.")
