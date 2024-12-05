@@ -15,24 +15,27 @@ def slow_print(text):
     print()
 #WritesGameplay
 def print_smiley_face():
-    smiley_face = """
-         --------- 
-        /         \
-       /   ^   ^   \
-      [   \_____/   ]
-       \___________/  
-    """
+    smiley_face = r"""
+          
+           ---------- 
+          /          \  
+         /  ^     ^   \  
+        [   \______/   ] 
+         \____________/  
+    """  
     print(smiley_face)
 def print_skull():
-    skull = """
-         ____________		 
-        /		     \
-        \   []  []	 /
-        /		     \
-        \  [][][][]  / 
-         \__________/  
+    skull_face = r"""
+          
+           ______________
+         /               \
+         \    []  []     /
+         /               \
+         \   [][][][]    /
+          \_____________/   
     """
-    print(skull)
+    print(skull_face)
+    
 def countdown_timer(seconds):
     for i in range(seconds, 0, -1):
         sys.stdout.write(f"\rTime left: {i} seconds")
@@ -156,7 +159,7 @@ def out_of_stock(chosen_ingredient):
 def back_of_the_shelf(chosen_ingredient):
     slow_print(f"You attempt to reach for the {chosen_ingredient}, when you realize your height may be the problem.")
     slow_print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
-    slow_print(f"How will choose to overcome this obstacle?")
+    slow_print(f"How will you choose to overcome this obstacle?")
     slow_print("1. Ask the tall individual if they can grab the item for you")
     slow_print("2. Attempt to use the step stool")
     choice = input("Please type the number of your choice: ")
