@@ -1,6 +1,5 @@
 import random
 import time
-import sys
 
 text_to_display = ""
 text_index = 0
@@ -24,6 +23,7 @@ def print_smiley_face():
          \____________/  
     """  
     print(smiley_face)
+#SmileyDrawing
 def print_skull():
     skull_face = r"""
           
@@ -35,28 +35,7 @@ def print_skull():
           \_____________/   
     """
     print(skull_face)
-    
-def countdown_timer(seconds):
-    for i in range(seconds, 0, -1):
-        sys.stdout.write(f"\rTime left: {i} seconds")
-        sys.stdout.flush()
-        time.sleep(1)
-    sys.stdout.write("\nTime's up!                      \n")
-def user_timer(options, timeout=10):
-    countdown_timer(timeout)
-    for option in options:
-        slow_print(option)
-        start_time = time.time()
-        choice = None
-        while time.time() - start_time < timeout:
-            choice = input("Please type the number of your choice: ")
-            if choice in [str(i) for i in range(1, len(options) + 1)]:
-                break
-            print("Invalid choice. Please try again.")
-        if choice not in [str(i) for i in range(1, len(options) + 1)]:
-            slow_print("Time's up! You failed to make a choice in time.")
-            print_skull()
-            return False
+#SkullDrawing    
 def main():
     intro()
 # Calls Intro 
