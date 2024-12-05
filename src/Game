@@ -13,7 +13,7 @@ def slow_print(text):
         time.sleep(0.05)
     print()
 #WritesGameplay
-def print_checkmark():
+def print_smiley_face():
     smiley_face = """
          --------- 
         /         \
@@ -24,15 +24,14 @@ def print_checkmark():
     print(smiley_face)
 def print_skull():
     skull = """
-      ____________		 
-     /		      \
-     \   []  []	  /
-     /		      \
-     \  [][][][]  / 
-      \__________/  
+         ____________		 
+        /		     \
+        \   []  []	 /
+        /		     \
+        \  [][][][]  / 
+         \__________/  
     """
-
-
+    print(skull)
 def main():
     intro()
 # Calls Intro 
@@ -90,14 +89,17 @@ def slippery_situation(chosen_ingredient):
         outcome = random.choice([f"You take small steps within the puddle and manage to obtain the {chosen_ingredient}!", "You attempt to make your way across the puddle but fall due to being overcautious!"])
         slow_print(outcome)
         if "fall" in outcome:
+            print_skull()
             return False
+        print_smiley_face()
         return True
     elif choice == "2": 
         outcome = random.choice([f"You glide swiftly over the puddle and successfully obtain the {chosen_ingredient}!", "You attempt to glide over the puddle but fall and make yourself a fool in front of everyone. \nA few moments later an employee approaches you and asks you to leave the store as you caused a disturbance."])
         slow_print(outcome)
         if "disturbance" in outcome:
+            print_skull
             return False
-        return True
+        
     else:
         slow_print("Invalid choice. Please try again.")
         return slippery_situation(chosen_ingredient)
@@ -113,16 +115,18 @@ def out_of_stock(chosen_ingredient):
         outcome = random.choice([f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... \n They come back with {chosen_ingredient}!", f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... and come back with nothing."])
         if "nothing" in outcome:
             slow_print("You check the shelves once more. Aha! Someone must have placed the item back while I wasn't looking.")
+            print_smiley_face()
             return True
         else:
             slow_print(outcome)
+            print_smiley_face()
             return True
     elif choice == "2":
         outcome = random.choice([f"You distracted the shopper and successfully obtained the {chosen_ingredient}", "You attempt to distract the shopper, but they see through your plan, and chase you out of the store!"])
         slow_print(outcome)
         if "chase" in outcome:
+            print_skull()
             return False
-        return True
     else:
         slow_print("Invalid choice. Please try again.")
         return out_of_stock(chosen_ingredient)
@@ -136,13 +140,14 @@ def back_of_the_shelf(chosen_ingredient):
     choice = input("Please type the number of your choice: ")
     if choice == "1":
         slow_print(f"You ask, and the tall individual happily obliges. They hand you the {chosen_ingredient}!")
+        print_smiley_face()
         return True
     elif choice == "2":
         outcome = random.choice([f"You step on the stepstool and successfully obtain the {chosen_ingredient}!", f"You step on the stepstool, and as you're about to grab the {chosen_ingredient}, you lose your balance and fall off."])
         slow_print(outcome)
         if "fall" in outcome:
+            print_skull()
             return False
-        return True
     else:
         slow_print("Invalid choice. Please try again.")
         return back_of_the_shelf(chosen_ingredient)
@@ -156,13 +161,14 @@ def children_shenanigans(chosen_ingredient):
     choice = input("Please type the number of your choice: ")
     if choice == "1":
         slow_print(f"You look once more to find the parents. \nHooray! You found them. \nThey gather their kids and you're able to obtain the {chosen_ingredient}.")
+        print_smiley_face()
         return True
     elif choice == "2":
         outcome = random.choice([f"You trip over the kids without them or anyone else noticing, and successfully obtain the {chosen_ingredient}!", "You trip over the kids, to which someone bears as a witness. \n An employee escorts you out the store."])
         slow_print(outcome)
         if "escorts" in outcome:
+            print_skull()
             return False
-        return True
     else:
         slow_print("Invalid choice. Please try again.")
         return children_shenanigans(chosen_ingredient)
@@ -178,10 +184,11 @@ def stalled_shopper(chosen_ingredient):
         outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {chosen_ingredient}!"])
         slow_print(outcome)
         if "pervert" in outcome:
+            print_skull()
             return False
-        return True
     elif choice == "2":
         slow_print("You ask the individual to move politely and she happily obliges!")
+        print_smiley_face()
         return True
     else:
         slow_print("Invalid choice. Please try again.")
@@ -196,9 +203,11 @@ def revenge_storyline():
         choice = input("Please type the number of your choice: ")
         if choice == "1":
             slow_print("You steal her cart when she isn't looking and succeed!")
+            print_smiley_face
             return True
         elif choice == "2":
             slow_print("You attempt to trip her, but she notices your movement and trips you before you get the chance.")
+            print_skull()
             return False
     elif decision == "2":
         slow_print("It wasn't that big of a deal. Let's gather those ingredients!")
