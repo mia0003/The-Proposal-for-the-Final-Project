@@ -1,10 +1,38 @@
 import random
+import time
+
+text_to_display = ""
+text_index = 0
 
 def slow_print(text):
     global text_to_display, text_index
     text_to_display = text
     text_index = 0
+    for char in text_to_display:
+        print(char, end="", flush=True)
+        time.sleep(0.05)
+    print()
 #WritesGameplay
+def print_checkmark():
+    smiley_face = """
+         --------- 
+        /         \
+       /   ^   ^   \
+      [   \_____/   ]
+       \___________/  
+    """
+    print(smiley_face)
+def print_skull():
+    skull = """
+      ____________		 
+     /		      \
+     \   []  []	  /
+     /		      \
+     \  [][][][]  / 
+      \__________/  
+    """
+
+
 def main():
     intro()
 # Calls Intro 
@@ -35,7 +63,6 @@ def given_list(meal):
         "HAMBURGERS": ["French Fries", "Hamburger Buns", "Ground Beef", "Cheese Slices"],
         "SPAGHETTI": ["Marinara Sauce", "Spaghetti Noodles", "Parmesan Cheese", "Garlic Bread", "Turkey"]
     }
-
     return meal_items.get(meal, [])
 # Calls list for the given meal chosen
 def the_obstacle(chosen_ingredient):
@@ -73,7 +100,7 @@ def slippery_situation(chosen_ingredient):
         return True
     else:
         slow_print("Invalid choice. Please try again.")
-        return back_of_the_shelf(chosen_ingredient)
+        return slippery_situation(chosen_ingredient)
 #SlipperySituation_Obstacle
 def out_of_stock(chosen_ingredient):
     slow_print(f"You're in the right section for the {chosen_ingredient}, but you're not seeing it in its location.")
@@ -98,7 +125,7 @@ def out_of_stock(chosen_ingredient):
         return True
     else:
         slow_print("Invalid choice. Please try again.")
-        return outcome(chosen_ingredient)
+        return out_of_stock(chosen_ingredient)
 #OutOfStock_Obstacle
 def back_of_the_shelf(chosen_ingredient):
     slow_print(f"You attempt to reach for the {chosen_ingredient}, when you realize your height may be the problem.")
