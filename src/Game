@@ -45,7 +45,7 @@ def given_list(meal):
 # Calls list for the given meal chosen
 def the_obstacle(chosen_ingredient):
     obstacle = random.choice(["Slippery Situation", "Out of Stock", "Back of the Shelf", "Children Shenanigans", "Stalled Shopper"])
-    print(f"You face a predicament: {obstacle}!")
+    slow_print(f"You face a predicament: {obstacle}!")
 
     if obstacle == "Slippery Situation":
         return slippery_situation(chosen_ingredient)
@@ -59,136 +59,136 @@ def the_obstacle(chosen_ingredient):
         return stalled_shopper(chosen_ingredient)
 #Obstacle paths
 def slippery_situation(chosen_ingredient):
-    print(f"As you're making your way towards the {chosen_ingredient}, you see a large puddle blocking your path. ")
-    print("It is unavoidable. How do you overcome this obstacle?")
-    print("1. Walk through the puddle carefully")
-    print("2. Glide amongst the puddle")
+    slow_print(f"As you're making your way towards the {chosen_ingredient}, you see a large puddle blocking your path. ")
+    slow_print("It is unavoidable. How do you overcome this obstacle?")
+    slow_print("1. Walk through the puddle carefully")
+    slow_print("2. Glide amongst the puddle")
     choice = input("Please type the number of your choice: ")
     if choice == "1":
         outcome = random.choice([f"You take small steps within the puddle and manage to obtain the {chosen_ingredient}!", "You attempt to make your way across the puddle but fall due to being overcautious!"])
-        print(outcome)
+        slow_print(outcome)
         if "fall" in outcome:
             return False
         return True
     elif choice == "2": 
         outcome = random.choice([f"You glide swiftly over the puddle and successfully obtain the {chosen_ingredient}!", "You attempt to glide over the puddle but fall and make yourself a fool in front of everyone. \nA few moments later an employee approaches you and asks you to leave the store as you caused a disturbance."])
-        print(outcome)
+        slow_print(outcome)
         if "disturbance" in outcome:
             return False
         return True
     else:
-        print("Invalid choice. Please try again.")
+        slow_print("Invalid choice. Please try again.")
         return back_of_the_shelf(chosen_ingredient)
 #SlipperySituation_Obstacle
 def out_of_stock(chosen_ingredient):
-    print(f"You're in the right section for the {chosen_ingredient}, but you're not seeing it in its location.")
-    print(f"As you're looking around to see if it was misplaced, you see an employee nearby you as well as a shopper with the item in their cart.")
-    print(f"What should you do?")
-    print("1. Ask the employee about the item") 
-    print("2. Distract the shopper and snatch the ingredient from their cart")
+    slow_print(f"You're in the right section for the {chosen_ingredient}, but you're not seeing it in its location.")
+    slow_print(f"As you're looking around to see if it was misplaced, you see an employee nearby you as well as a shopper with the item in their cart.")
+    slow_print(f"What should you do?")
+    slow_print("1. Ask the employee about the item") 
+    slow_print("2. Distract the shopper and snatch the ingredient from their cart")
     choice = input("Please type the number of your choice: ")
     if choice == "1":
         outcome = random.choice([f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... \n They come back with {chosen_ingredient}!", f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... and come back with nothing."])
         if "nothing" in outcome:
-            print("You check the shelves once more. Aha! Someone must have placed the item back while I wasn't looking.")
+            slow_print("You check the shelves once more. Aha! Someone must have placed the item back while I wasn't looking.")
             return True
         else:
-            print(outcome)
+            slow_print(outcome)
             return True
     elif choice == "2":
         outcome = random.choice([f"You distracted the shopper and successfully obtained the {chosen_ingredient}", "You attempt to distract the shopper, but they see through your plan, and chase you out of the store!"])
-        print(outcome)
+        slow_print(outcome)
         if "chase" in outcome:
             return False
         return True
     else:
-        print("Invalid choice. Please try again.")
+        slow_print("Invalid choice. Please try again.")
         return outcome(chosen_ingredient)
 #OutOfStock_Obstacle
 def back_of_the_shelf(chosen_ingredient):
-    print(f"You attempt to reach for the {chosen_ingredient}, when you realize your height may be the problem.")
-    print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
-    print(f"How will choose to overcome this obstacle?")
-    print("1. Ask the tall individual if they can grab the item for you")
-    print("2. Attempt to use the step stool")
+    slow_print(f"You attempt to reach for the {chosen_ingredient}, when you realize your height may be the problem.")
+    slow_print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
+    slow_print(f"How will choose to overcome this obstacle?")
+    slow_print("1. Ask the tall individual if they can grab the item for you")
+    slow_print("2. Attempt to use the step stool")
     choice = input("Please type the number of your choice: ")
     if choice == "1":
-        print(f"You ask, and the tall individual happily obliges. They hand you the {chosen_ingredient}!")
+        slow_print(f"You ask, and the tall individual happily obliges. They hand you the {chosen_ingredient}!")
         return True
     elif choice == "2":
         outcome = random.choice([f"You step on the stepstool and successfully obtain the {chosen_ingredient}!", f"You step on the stepstool, and as you're about to grab the {chosen_ingredient}, you lose your balance and fall off."])
-        print(outcome)
+        slow_print(outcome)
         if "fall" in outcome:
             return False
         return True
     else:
-        print("Invalid choice. Please try again.")
+        slow_print("Invalid choice. Please try again.")
         return back_of_the_shelf(chosen_ingredient)
 #BackOfTheShelf_Obstacle
 def children_shenanigans(chosen_ingredient):
-    print(f"As you make a beeline for the {chosen_ingredient}, a bunch of kids appear and begin to play around with it!")
-    print(f"You look around for their parents, but it appears they're nowhere within sight.")
-    print(f"What do you do?")
-    print("1. Try once more to look for the parents") 
-    print("2. Trip over the kids")
+    slow_print(f"As you make a beeline for the {chosen_ingredient}, a bunch of kids appear and begin to play around with it!")
+    slow_print(f"You look around for their parents, but it appears they're nowhere within sight.")
+    slow_print(f"What do you do?")
+    slow_print("1. Try once more to look for the parents") 
+    slow_print("2. Trip over the kids")
     choice = input("Please type the number of your choice: ")
     if choice == "1":
-        print(f"You look once more to find the parents. \nHooray! You found them. \nThey gather their kids and you're able to obtain the {chosen_ingredient}.")
+        slow_print(f"You look once more to find the parents. \nHooray! You found them. \nThey gather their kids and you're able to obtain the {chosen_ingredient}.")
         return True
     elif choice == "2":
         outcome = random.choice([f"You trip over the kids without them or anyone else noticing, and successfully obtain the {chosen_ingredient}!", "You trip over the kids, to which someone bears as a witness. \n An employee escorts you out the store."])
-        print(outcome)
+        slow_print(outcome)
         if "escorts" in outcome:
             return False
         return True
     else:
-        print("Invalid choice. Please try again.")
+        slow_print("Invalid choice. Please try again.")
         return children_shenanigans(chosen_ingredient)
 #ChildrenShenanigans_Obstacle
 def stalled_shopper(chosen_ingredient):
-    print(f"You make your way towards the {chosen_ingredient}, when you see someone standing in front of the section.")
-    print("The indivudal seems to be on their phone.")
-    print("What should you do?")
-    print("1. Sneak around the individual and attempt to get the item") 
-    print("2. Ask the individual to move")
+    slow_print(f"You make your way towards the {chosen_ingredient}, when you see someone standing in front of the section.")
+    slow_print("The indivudal seems to be on their phone.")
+    slow_print("What should you do?")
+    slow_print("1. Sneak around the individual and attempt to get the item") 
+    slow_print("2. Ask the individual to move")
     choice = input("Please type the number of your choice: ")
     if choice == "1":
         outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {chosen_ingredient}!"])
-        print(outcome)
+        slow_print(outcome)
         if "pervert" in outcome:
             return False
         return True
     elif choice == "2":
-        print("You ask the individual to move politely and she happily obliges!")
+        slow_print("You ask the individual to move politely and she happily obliges!")
         return True
     else:
-        print("Invalid choice. Please try again.")
+        slow_print("Invalid choice. Please try again.")
         return stalled_shopper(chosen_ingredient)
 #StalledShopper_Obstacle  
 def revenge_storyline():
-    print("You spot the lady who took your cart from earlier.")
-    print("Should you take revenge? \n1. Yes \n2. No")
+    slow_print("You spot the lady who took your cart from earlier.")
+    slow_print("Should you take revenge? \n1. Yes \n2. No")
     decision = input("Please type the number of your choice: ")
     if decision == "1":
-        print("How do you want to take revenge? \n1. Steal her cart when she isn't looking \n2. Trip her")
+        slow_print("How do you want to take revenge? \n1. Steal her cart when she isn't looking \n2. Trip her")
         choice = input("Please type the number of your choice: ")
         if choice == "1":
-            print("You steal her cart when she isn't looking and succeed!")
+            slow_print("You steal her cart when she isn't looking and succeed!")
             return True
         elif choice == "2":
-            print("You attempt to trip her, but she notices your movement and trips you before you get the chance.")
+            slow_print("You attempt to trip her, but she notices your movement and trips you before you get the chance.")
             return False
     elif decision == "2":
-        print("It wasn't that big of a deal. Let's gather those ingredients!")
+        slow_print("It wasn't that big of a deal. Let's gather those ingredients!")
         return True
     else:
-        print("Invalid choice. Please try again.")
+        slow_print("Invalid choice. Please try again.")
         return revenge_storyline()
 #RevengeStoryline_Special
 def choose_ingredient(meal, ingredients_left, revenge_triggered):
-    print(f"Which ingredient would you like to collect for {meal}?")
+    slow_print(f"Which ingredient would you like to collect for {meal}?")
     for idx, ingredient in enumerate(ingredients_left, start=1):
-        print(f"{idx}. {ingredient}")
+        slow_print(f"{idx}. {ingredient}")
     choice = input(f"Select the ingredient number (1-{len(ingredients_left)}): ")
     if choice in [str(i) for i in range(1, len(ingredients_left) + 1)]:
         chosen_ingredient = ingredients_left[int(choice) - 1]
@@ -199,7 +199,7 @@ def choose_ingredient(meal, ingredients_left, revenge_triggered):
         f"You're adding {chosen_ingredient} to your inventory!",
         f"Let's grab some {chosen_ingredient}!"
     ]
-        print(random.choice(collection_phrases))
+        slow_print(random.choice(collection_phrases))
         obstacle_result = the_obstacle(chosen_ingredient)
 
         if obstacle_result is False:
@@ -213,7 +213,7 @@ def choose_ingredient(meal, ingredients_left, revenge_triggered):
             revenge_storyline()
         return chosen_ingredient, ingredients_left, revenge_triggered
     else:
-        print("Invalid choice. Please choose a valid ingredient.")
+        slow_print("Invalid choice. Please choose a valid ingredient.")
         return choose_ingredient(meal, ingredients_left, revenge_triggered)
 #Player chooses which ingredient to obtain and lists ingredient list of remaining
 def continuing_ending(meal, ingredients_left):
@@ -221,109 +221,109 @@ def continuing_ending(meal, ingredients_left):
     while ingredients_left:
         ingredient, ingredients_left, revenge_triggered = choose_ingredient(meal, ingredients_left, revenge_triggered)
         if ingredient is None:
-            print("Game Over. You cannot continue.")
+            slow_print("Game Over. You cannot continue.")
             return
-        print(f"Ingredients left to obtain: {ingredients_left}")
-    print("Yay! All ingredients have been collected. Now, your friend can make dinner for you!")
+        slow_print(f"Ingredients left to obtain: {ingredients_left}")
+    slow_print("Yay! All ingredients have been collected. Now, your friend can make dinner for you!")
 #Determines if game continues or ends (depending on ingredients gathered)
 def tacos_story(ingredients_needed):
-    print("Now, which grocery store should you go to?")
-    print("There seems to be three nearby you. \n Where should you go? \n 1. Oates \n 2. Smiths \n 3. Sacred")
+    slow_print("Now, which grocery store should you go to?")
+    slow_print("There seems to be three nearby you. \n Where should you go? \n 1. Oates \n 2. Smiths \n 3. Sacred")
     designated_store = input("Please type the number of your choice: ")
     if designated_store == "1":
-        print("You chose: Oates!")
+        slow_print("You chose: Oates!")
         oates()
     elif designated_store == "2":
-        print("You chose: Smiths!")
+        slow_print("You chose: Smiths!")
         smiths()
     elif designated_store == "3":
-        print("You chose: Sacred!") 
+        slow_print("You chose: Sacred!") 
         sacred()
     ingredients_needed = given_list("TACOS")
     continuing_ending("TACOS", ingredients_needed)
 #Picks which store to heads towards (3)
 def hamburgers_story(ingredients_needed):
-    print("Now, which grocery store should you go to?")
-    print("...?")
-    print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
-    print("Franks it is!")
+    slow_print("Now, which grocery store should you go to?")
+    slow_print("...?")
+    slow_print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
+    slow_print("Franks it is!")
     franks()
     ingredients_needed = given_list("HAMBURGERS")
     continuing_ending("HAMBURGERS", ingredients_needed)
 #Picks which store to heads towards (1)
 def spaghetti_story(ingredients_needed):
-    print("Now, which grocery store should you go to?")
-    print("There seems to be two nearby you. \n Where should you go? \n 1. Jacksons \n 2. Sundays")
+    slow_print("Now, which grocery store should you go to?")
+    slow_print("There seems to be two nearby you. \n Where should you go? \n 1. Jacksons \n 2. Sundays")
     designated_store = input("Please type the number of your choice: ")
     if designated_store == "1":
-        print("You chose: Jacksons!")
+        slow_print("You chose: Jacksons!")
         jacksons()
     elif designated_store == "2":
-        print("You chose: Sundays!")
+        slow_print("You chose: Sundays!")
         sundays()
         ingredients_needed = given_list("SPAGHETTI")
         continuing_ending("SPAGHETTI", ingredients_needed)
 #Picks which store to heads towards (2)
 def oates():
-    print("You arrive at the Oates grocery store.")
-    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    slow_print("You arrive at the Oates grocery store.")
+    slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
     if hold_item == "1":
-        print("You obtain a basket!")
+        slow_print("You obtain a basket!")
     elif hold_item == "2":
-        print("You obtain a cart!")
+        slow_print("You obtain a cart!")
     else:
         print("Invalid choice. Please enter 1 or 2.")
 #Oates Storyline
 def smiths():
-    print("You arrive at the Smiths grocery store.")
-    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    slow_print("You arrive at the Smiths grocery store.")
+    slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
     if hold_item == "1":
-        print("You obtain a basket!")
+        slow_print("You obtain a basket!")
     elif hold_item == "2":
-        print("You decide to grab a cart! You make haste to obtain one, as there is only one left.")
-        print("As you're about to grab the last one, a lady pushes you aside and takes the cart for herself. Shocked, you grab a basket instead as there is no time to waste.")
+        slow_print("You decide to grab a cart! You make haste to obtain one, as there is only one left.")
+        slow_print("As you're about to grab the last one, a lady pushes you aside and takes the cart for herself. Shocked, you grab a basket instead as there is no time to waste.")
     else:
-        print("Invalid choice. Please enter 1 or 2.")
+        slow_print("Invalid choice. Please enter 1 or 2.")
 #Smiths Storyline
 def sacred():
-    print("You arrive at the Sacred grocery store.")
-    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    slow_print("You arrive at the Sacred grocery store.")
+    slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
     if hold_item == "1":
-        print("You obtain a basket!")
+        slow_print("You obtain a basket!")
     elif hold_item == "2":
-        print("You obtain a cart!")
+        slow_print("You obtain a cart!")
     else:
-        print("Invalid choice. Please enter 1 or 2.")
+        slow_print("Invalid choice. Please enter 1 or 2.")
 #Sacred Storyline
 def franks():
-    print("You arrive at the Franks grocery store.")
-    print("Unfortunately, as you enter the store, you see that there are no options for you to carry your items.")
-    print("Looks like you'll have to make use of your hands...")
+    slow_print("You arrive at the Franks grocery store.")
+    slow_print("Unfortunately, as you enter the store, you see that there are no options for you to carry your items.")
+    slow_print("Looks like you'll have to make use of your hands...")
 #Franks Storyline
 def jacksons():
-    print("You arrive at the Jackons grocery store.")
-    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    slow_print("You arrive at the Jackons grocery store.")
+    slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
     if hold_item == "1":
-        print("You obtain a basket!")
+        slow_print("You obtain a basket!")
     elif hold_item == "2":
-        print("You obtain a cart!")
+        slow_print("You obtain a cart!")
     else:
-        print("Invalid choice. Please enter 1 or 2.")
+        slow_print("Invalid choice. Please enter 1 or 2.")
 #Jacksons Storyline
 def sundays():
-    print("You arrive at the Sundays grocery store.")
-    print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
+    slow_print("You arrive at the Sundays grocery store.")
+    slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
     if hold_item == "1":
-        print("You obtain a basket!")
+        slow_print("You obtain a basket!")
     elif hold_item == "2":
-        print("You obtain a cart!")
+        slow_print("You obtain a cart!")
     else:
-        print("Invalid choice. Please enter 1 or 2.")
+        slow_print("Invalid choice. Please enter 1 or 2.")
 #Sundays Storyline
 if __name__ == "__main__":
     main() 
