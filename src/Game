@@ -35,7 +35,7 @@ def given_list(meal):
 
     return meal_items.get(meal, [])
 # Calls list for the given meal chosen
-def choose_ingredient(meal, ingredients_left):
+def choose_ingredient(meal, ingredients_left, revenge_triggered):
     collection_phrases = [
         f"You have selected {ingredient}!",
         f"Time to grab some {ingredient}!",
@@ -51,7 +51,11 @@ def choose_ingredient(meal, ingredients_left):
         chosen_ingredient = ingredients_left[int(choice) - 1]
         ingredients_left.remove(chosen_ingredient)
         print(random.choice(collection_phrases))
-        return chosen_ingredient, ingredients_left
+
+        if not revenge_triggered and random.random() < 1/len(ingredients_left):
+            revenge_triggered = True
+            revenge_storyline()
+        return chosen_ingredient, ingredients_left, revenge_triggered
     else:
         print("Invalid choice. Please choose a valid ingredient.")
         return choose_ingredient(meal, ingredients_left)
@@ -236,7 +240,24 @@ def stalled_shopper(ingredient):
         print("Game Over. 911 was called on you and you were escorted out by police.")
         return False
     return True
-#StalledShopper_Obstacle    
+#StalledShopper_Obstacle  
+def revenge_storyline():
+    print("You spot the lady who took your cart from earlier.")
+    print("Should you take revenge? \n 1. Yes \n 2. No")
+    decision = input("Please type the number of your choice: ")
+    if decision == "1":
+        print("How do you want to take revenge? \n 1. Steal her cart when she isn't looking \n 2. Trip her")
+        choice = input("Please type the number of your choice: ")
+        if choice == "1":
+            print("You steal her cart when she isn't looking and succeed!")
+        elif choice == "2":
+            print("You attempt to trip her, but she notices your movement and trips you before you get the chance.")
+            print("Game Over. You leave the store out of embarrassment.")
+            return False
+        return True
+    elif decision == "2":
+        print("It wasn't that big of a deal. Let's gather those ingredients!")
+#RevengeStoryline_Special
 if __name__ == "__main__":
     main() 
 
