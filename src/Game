@@ -200,7 +200,7 @@ def back_of_the_shelf(ingredient):
     choice = input("Please type the number of your choice: ")
     if choice == "1":
         print("You ask, and the tall individual happily obliges")
-    if choice == "2":
+    elif choice == "2":
         outcome = random.choice([f"You step on the stepstool and successfully obtain the {ingredient}!", f"You step on the stepstool, and as you're about to grab the {ingredient}, you lose your balance and fall off."])
     print(outcome)
     if "balance" in outcome:
@@ -209,9 +209,36 @@ def back_of_the_shelf(ingredient):
     return True
 #BackOfTheShelf_Obstacle
 def children_shenanigans(ingredient):
+    print(f"As you make a beeline for the {ingredient}, a bunch of kids appear and begin to play around with the {ingredient}!")
+    print(f"You look around for their parents, but it appears they're nowhere within site.")
+    print(f"What do you do? \n 1. Try once more to look for the parents \n 2. Trip over the kids")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        print(f"You look once more to find the parents. \n Hooray! You found them. \n They gather their kids and you're able to obtain the {ingredient}.")
+    elif choice == "2":
+        outcome = random.choice([f"You trip over the kids without them or anyone else noticing, and successfully obtain the {ingredient}!", "You trip over the kids, to which someone bears as a witness. \n An employee escorts you out the store."])
+    print(outcome)
+    if "escorts" in outcome:
+        print("Game Over. Someone reported you for tripping over children.")
+        return False
+    return True
+#ChildrenShenanigans_Obstacle
 def stalled_shopper(ingredient):
+    print(f"You make your way towards the {ingredient}, when you see someone standing in front of the section.")
+    print("The indivudal seems to be on there phone.")
+    print("What should you do? \n 1. Sneak around the individual and attempt to get the item \n 2. Ask the individual to move")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {ingredient}!"])
+    elif choice == "2":
+        print("You ask the individual to move politely and she happily obliges!")
+    if "pervert" in outcome:
+        print("Game Over. 911 was called on you and you were escorted out by police.")
+        return False
+    return True
+#StalledShopper_Obstacle    
 if __name__ == "__main__":
-    main()
+    main() 
 
 
 
