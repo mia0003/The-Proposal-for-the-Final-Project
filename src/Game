@@ -144,7 +144,7 @@ def sundays():
         print("You obtain a basket!")
     if hold_item == "2":
         print("You obtain a cart!")
-
+#Sundays Storyline
 def the_obstacle(items_needed):
     obstacle = random.choice(["Slippery Situation", "Out of Stock", "Back of the Shelf", "Children Shenanigans!", "Stalled Shopper"])
     ingredient = random.choice(items_needed)
@@ -185,7 +185,6 @@ def out_of_stock(ingredient):
     elif choice == "2":
         outcome = random.choice([f"You distracted the shopper and successfully obtained the {ingredient}", "You attempt to distract the shopper, but they see through your plan, and chase you out of the store!"])
     print(outcome)
-    
     if "chase" in outcome:
         print("Game Over. You have been chased out of the store.")
         return False
@@ -194,6 +193,21 @@ def out_of_stock(ingredient):
     return True
 #OutOfStock_Obstacle
 def back_of_the_shelf(ingredient):
+    print(f"You attempt to reach for the {ingredient}, when you realize your height may be the problem.")
+    print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
+    print(f"How will choose to overcome this obstacle?")
+    print("1. Ask the tall individual if they can grab the item for you \n 2. Attempt to use the stepstool")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        print("You ask, and the tall individual happily obliges")
+    if choice == "2":
+        outcome = random.choice([f"You step on the stepstool and successfully obtain the {ingredient}!", f"You step on the stepstool, and as you're about to grab the {ingredient}, you lose your balance and fall off."])
+    print(outcome)
+    if "balance" in outcome:
+        print(f"You pass away trying to obtain {ingredient}.")
+        return False
+    return True
+#BackOfTheShelf_Obstacle
 def children_shenanigans(ingredient):
 def stalled_shopper(ingredient):
 if __name__ == "__main__":
