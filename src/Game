@@ -1,16 +1,15 @@
 import random
 import time
 import sys
+
 def slow_print(text, delay=0.05):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
-
         if char.isalpha() or char.isdigit():
             time.sleep(delay)
-        
-#Writes_gameplay
     print()
+#WritesGameplay
 def main():
     intro()
 # Calls Intro 
@@ -24,18 +23,16 @@ def intro():
     slow_print("Ingredients needed for the meal:")
     for item in items_needed:
         slow_print(f" - {item}")
-    
     if meal == "TACOS":
-        tacos_story()
-    if meal == "HAMBURGERS":
-        hamburgers_story()
-    if meal == "SPAGHETTI":
-        spaghetti_story()
+        tacos_story(items_needed)
+    elif meal == "HAMBURGERS":
+        hamburgers_story(items_needed)
+    elif meal == "SPAGHETTI":
+        spaghetti_story(items_needed)
 # Introduction to game + provides meal & ingredients
 def pick_random_meal():
     meals = ["TACOS", "HAMBURGERS", "SPAGHETTI"]
-    idx = random.randrange(len(meals))
-    return meals[idx]
+    return random.choice(meals)
 # Picks random meal
 def given_list(meal):
     meal_items = {
@@ -46,22 +43,174 @@ def given_list(meal):
 
     return meal_items.get(meal, [])
 # Calls list for the given meal chosen
+def the_obstacle(chosen_ingredient):
+    obstacle = random.choice(["Slippery Situation", "Out of Stock", "Back of the Shelf", "Children Shenanigans!", "Stalled Shopper"])
+    print(f"You face a predicament: {obstacle}!")
+
+    if obstacle == "Slippery Situation":
+        return slippery_situation(chosen_ingredient)
+    elif obstacle == "Out of Stock":
+        return out_of_stock(chosen_ingredient)
+    elif obstacle == "Back of the Shelf":
+        return back_of_the_shelf(chosen_ingredient)
+    elif obstacle == "Children Shenanigans":
+        return children_shenanigans(chosen_ingredient)
+    elif obstacle == "Stalled Shopper":
+        return stalled_shopper(chosen_ingredient)
+#Obstacle paths
+def slippery_situation(chosen_ingredient):
+    print(f"As you're making your way towards the {chosen_ingredient}, you see a large puddle blocking your path. ")
+    print("It is unavoidable. How do you overcome this obstacle?")
+    print("1. Walk through the puddle carefully")
+    print("2. Glide amongst the puddle")
+    choice = input("Please type the number of your choice:")
+    if choice == "1":
+        outcome = random.choice([f"You take small steps within the puddle and manage to obtain the {chosen_ingredient}!", "You attempt to make your way across the puddle but fall due to being overcautious!"])
+        print(outcome)
+        if "fall" in outcome:
+            print("Game Over. You have fallen and cannot continue.")
+            return False
+        return True
+    elif choice == "2": 
+        outcome = random.choice([f"You glide swiftly over the puddle and successfully obtain the {chosen_ingredient}!", "You attempt to glide over the puddle but fall and make yourself a fool in front of everyone. \n A few moments later an employee approaches you and asks you to leave the store as you caused a disturbance."])
+        print(outcome)
+        if "disturbance" in outcome:
+            print("Game Over. You have been asked to leave for causing a scene.")
+            return False
+        return True
+    else:
+        print("Invalid choice. Please try again.")
+        return back_of_the_shelf(chosen_ingredient)
+#SlipperySituation_Obstacle
+def out_of_stock(chosen_ingredient):
+    print(f"You're in the right section for the {chosen_ingredient}, but you're not seeing it in its location.")
+    print(f"As you're looking around to see if it was misplaced, you see an employee nearby you as well as a shopper with the item in their cart.")
+    print(f"What should you do?")
+    print("1. Ask the employee about the item") 
+    print("2. Distract the shopper and snatch the ingredient from their cart")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        outcome = random.choice([f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... \n They come back with {chosen_ingredient}!", f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... and come back with nothing."])
+        if "nothing" in outcome:
+            print("You check the shelves once more. Aha! Someone must have placed the item back while I wasn't looking.")
+            return True
+        else:
+            print(outcome)
+            return True
+    elif choice == "2":
+        outcome = random.choice([f"You distracted the shopper and successfully obtained the {chosen_ingredient}", "You attempt to distract the shopper, but they see through your plan, and chase you out of the store!"])
+        print(outcome)
+        if "chase" in outcome:
+            print("Game Over. You have been chased out of the store.")
+            return False
+        return True
+    else:
+        print("Invalid choice. Please try again.")
+        return outcome(chosen_ingredient)
+#OutOfStock_Obstacle
+def back_of_the_shelf(chosen_ingredient):
+    print(f"You attempt to reach for the {chosen_ingredient}, when you realize your height may be the problem.")
+    print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
+    print(f"How will choose to overcome this obstacle?")
+    print("1. Ask the tall individual if they can grab the item for you")
+    print("2. Attempt to use the stepstool")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        print(f"You ask, and the tall individual happily obliges. They hand you the {chosen_ingredient}!")
+        return True
+    elif choice == "2":
+        outcome = random.choice([f"You step on the stepstool and successfully obtain the {chosen_ingredient}!", f"You step on the stepstool, and as you're about to grab the {chosen_ingredient}, you lose your balance and fall off."])
+        print(outcome)
+        if "fall" in outcome:
+            print(f"You pass away trying to obtain {chosen_ingredient}.")
+            return False
+        return True
+    else:
+        print("Invalid choice. Please try again.")
+        return back_of_the_shelf(chosen_ingredient)
+#BackOfTheShelf_Obstacle
+def children_shenanigans(chosen_ingredient):
+    print(f"As you make a beeline for the {chosen_ingredient}, a bunch of kids appear and begin to play around with it!")
+    print(f"You look around for their parents, but it appears they're nowhere within site.")
+    print(f"What do you do?")
+    print("1. Try once more to look for the parents") 
+    print("2. Trip over the kids")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        print(f"You look once more to find the parents. \nHooray! You found them. \nThey gather their kids and you're able to obtain the {chosen_ingredient}.")
+        return True
+    elif choice == "2":
+        outcome = random.choice([f"You trip over the kids without them or anyone else noticing, and successfully obtain the {chosen_ingredient}!", "You trip over the kids, to which someone bears as a witness. \n An employee escorts you out the store."])
+        print(outcome)
+        if "escorts" in outcome:
+            print("Game Over. Someone reported you for tripping over children.")
+            return False
+        return True
+    else:
+        print("Invalid choice. Please try again.")
+        return children_shenanigans(chosen_ingredient)
+#ChildrenShenanigans_Obstacle
+def stalled_shopper(chosen_ingredient):
+    print(f"You make your way towards the {chosen_ingredient}, when you see someone standing in front of the section.")
+    print("The indivudal seems to be on their phone.")
+    print("What should you do?")
+    print("1. Sneak around the individual and attempt to get the item") 
+    print("2. Ask the individual to move")
+    choice = input("Please type the number of your choice: ")
+    if choice == "1":
+        outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {chosen_ingredient}!"])
+        print(outcome)
+        if "pervert" in outcome:
+            print("Game Over. 911 was called on you and you were escorted out by police.")
+            return False
+        return True
+    elif choice == "2":
+        print("You ask the individual to move politely and she happily obliges!")
+        return True
+    else:
+        print("Invalid choice. Please try again.")
+        return stalled_shopper(chosen_ingredient)
+#StalledShopper_Obstacle  
+def revenge_storyline():
+    print("You spot the lady who took your cart from earlier.")
+    print("Should you take revenge? \n1. Yes \n2. No")
+    decision = input("Please type the number of your choice: ")
+    if decision == "1":
+        print("How do you want to take revenge? \n1. Steal her cart when she isn't looking \n2. Trip her")
+        choice = input("Please type the number of your choice: ")
+        if choice == "1":
+            print("You steal her cart when she isn't looking and succeed!")
+            return True
+        elif choice == "2":
+            print("You attempt to trip her, but she notices your movement and trips you before you get the chance.")
+            print("Game Over. You leave the store out of embarrassment.")
+            return False
+    elif decision == "2":
+        print("It wasn't that big of a deal. Let's gather those ingredients!")
+        return True
+    else:
+        print("Invalid choice. Please try again.")
+        return revenge_storyline()
+#RevengeStoryline_Special
 def choose_ingredient(meal, ingredients_left, revenge_triggered):
-    collection_phrases = [
-        f"You have selected {ingredient}!",
-        f"Time to grab some {ingredient}!",
-        f"You're adding {ingredient} to your inventory!",
-        f"Let's grab some {ingredient}!"
-    ]
-    
     print(f"Which ingredient would you like to collect for {meal}?")
     for idx, ingredient in enumerate(ingredients_left, start=1):
         print(f"{idx}. {ingredient}")
-    choice = input("Select the ingredient number (1-7): ")
+    choice = input(f"Select the ingredient number (1-{len(ingredients_left)}): ")
     if choice in [str(i) for i in range(1, len(ingredients_left) + 1)]:
         chosen_ingredient = ingredients_left[int(choice) - 1]
         ingredients_left.remove(chosen_ingredient)
+        collection_phrases = [
+        f"You have selected {chosen_ingredient}!",
+        f"Time to grab some {chosen_ingredient}!",
+        f"You're adding {chosen_ingredient} to your inventory!",
+        f"Let's grab some {chosen_ingredient}!"
+    ]
         print(random.choice(collection_phrases))
+        obstacle_result = the_obstacle(chosen_ingredient)
+
+        if not obstacle_result:
+            return None, ingredients_left, revenge_triggered
 
         if not revenge_triggered and random.random() < 1/len(ingredients_left):
             revenge_triggered = True
@@ -69,15 +218,16 @@ def choose_ingredient(meal, ingredients_left, revenge_triggered):
         return chosen_ingredient, ingredients_left, revenge_triggered
     else:
         print("Invalid choice. Please choose a valid ingredient.")
-        return choose_ingredient(meal, ingredients_left)
+        return choose_ingredient(meal, ingredients_left, revenge_triggered)
 #Player chooses which ingredient to obtain and lists ingredient list of remaining
 def continuing_ending(meal, ingredients_left):
-        while ingredients_left:
-            ingredient, ingredients_left = choose_ingredient(meal, ingredients_left)
-            print(f"Ingredients left to obtain: {ingredients_left}")
-        print("Yay! All ingredients have been collected. Now, your friend can make dinner for you!")
+    revenge_triggered = False
+    while ingredients_left:
+        ingredient, ingredients_left, revenge_triggered = choose_ingredient(meal, ingredients_left, revenge_triggered)
+        print(f"Ingredients left to obtain: {ingredients_left}")
+    print("Yay! All ingredients have been collected. Now, your friend can make dinner for you!")
 #Determines if game continues or ends (depending on ingredients gathered)
-def tacos_story():
+def tacos_story(ingredients_needed):
     print("Now, which grocery store should you go to?")
     print("There seems to be three nearby you. \n Where should you go? \n 1. Oates \n 2. Smiths \n 3. Sacred")
     designated_store = input("Please type the number of your choice: ")
@@ -91,18 +241,18 @@ def tacos_story():
         print("You chose: Sacred!") 
         sacred()
     ingredients_needed = given_list("TACOS")
-    the_obstacle(ingredients_needed)
+    continuing_ending("TACOS", ingredients_needed)
 #Picks which store to heads towards (3)
-def hamburgers_story():
+def hamburgers_story(ingredients_needed):
     print("Now, which grocery store should you go to?")
     print("...?")
     print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
     print("Franks it is!")
     franks()
     ingredients_needed = given_list("HAMBURGERS")
-    the_obstacle(ingredients_needed)
+    continuing_ending("HAMBURGERS", ingredients_needed)
 #Picks which store to heads towards (1)
-def spaghetti_story():
+def spaghetti_story(ingredients_needed):
     print("Now, which grocery store should you go to?")
     print("There seems to be two nearby you. \n Where should you go? \n 1. Jacksons \n 2. Sundays")
     designated_store = input("Please type the number of your choice: ")
@@ -113,7 +263,7 @@ def spaghetti_story():
         print("You chose: Sundays!")
         sundays()
         ingredients_needed = given_list("SPAGHETTI")
-        the_obstacle(ingredients_needed)
+        continuing_ending("SPAGHETTI", ingredients_needed)
 #Picks which store to heads towards (2)
 def oates():
     print("You arrive at the Oates grocery store.")
@@ -166,115 +316,6 @@ def sundays():
     if hold_item == "2":
         print("You obtain a cart!")
 #Sundays Storyline
-def the_obstacle(items_needed):
-    obstacle = random.choice(["Slippery Situation", "Out of Stock", "Back of the Shelf", "Children Shenanigans!", "Stalled Shopper"])
-    ingredient = random.choice(items_needed)
-    print(f"You face a predicament: {obstacle}!")
-
-    if obstacle == "Slippery Situation":
-        slippery_situation(ingredient)
-    elif obstacle == "Out of Stock":
-        out_of_stock(ingredient)
-    elif obstacle == "Back of the Shelf":
-        back_of_the_shelf(ingredient)
-    elif obstacle == "Children Shenanigans":
-        children_shenanigans(ingredient)
-    elif obstacle == "Stalled Shopper":
-        stalled_shopper(ingredient)
-def slippery_situation(ingredient):
-    print(f"As you're making your way towards the {ingredient}, you see a large puddle blocking your path. ")
-    print("It is unavoidable. How do you overcome this obstacle? \n 1. Walk through the puddle carefully \n 2. Glide amongst the puddle")
-    choice = input("Please type the number of your choice:")
-    if choice == "1":
-        outcome = random.choice([f"You take small steps within the puddle and manage to obtain the {ingredient}!", "You attempt to make your way across the puddle but fall due to being overcautious!"])
-    elif choice == "2": 
-        outcome = random.choice([f"You glide swiftly over the puddle and successfully obtain the {ingredient}!", "You attempt to glide over the puddle but fall and make yourself a fool in front of everyone. \n A few moments later an employee approaches you and asks you to leave the store as you caused a disturbance."])
-    print(outcome)
-    if "disturbance" in outcome:
-        print("Game Over. You have been asked to leave for causing a scene.")
-        return False
-    return True
-#SlipperySituation_Obstacle
-def out_of_stock(ingredient):
-    print(f"You're in the right section for the {ingredient}, but you're not seeing it in its location.")
-    print(f"As you're looking around to see if it was misplaced, you see an employee nearby you as well as a shopper with the item in their cart.")
-    print(f"What should you do?")
-    print("1. Ask the employee if about the item \n 2. Distract the shopper and snatch the ingredient from her cart")
-    choice = input("Please type the number of your choice: ")
-    if choice == "1":
-        outcome = random.choice([f"You approach the employee and ask if they have anymore {ingredient} in the back. \n They go check in the back... \n They come back with {ingredient}!", f"You approach the employee and ask if they have anymore {ingredient} in the back. \n They go check in the back... and come back with nothing."])
-    elif choice == "2":
-        outcome = random.choice([f"You distracted the shopper and successfully obtained the {ingredient}", "You attempt to distract the shopper, but they see through your plan, and chase you out of the store!"])
-    print(outcome)
-    if "chase" in outcome:
-        print("Game Over. You have been chased out of the store.")
-        return False
-    if "nothing" in outcome:
-        print("You check the shelves once more. Aha! Someone must have placed the item back while you weren't looking.")
-    return True
-#OutOfStock_Obstacle
-def back_of_the_shelf(ingredient):
-    print(f"You attempt to reach for the {ingredient}, when you realize your height may be the problem.")
-    print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
-    print(f"How will choose to overcome this obstacle?")
-    print("1. Ask the tall individual if they can grab the item for you \n 2. Attempt to use the stepstool")
-    choice = input("Please type the number of your choice: ")
-    if choice == "1":
-        print("You ask, and the tall individual happily obliges")
-    elif choice == "2":
-        outcome = random.choice([f"You step on the stepstool and successfully obtain the {ingredient}!", f"You step on the stepstool, and as you're about to grab the {ingredient}, you lose your balance and fall off."])
-    print(outcome)
-    if "balance" in outcome:
-        print(f"You pass away trying to obtain {ingredient}.")
-        return False
-    return True
-#BackOfTheShelf_Obstacle
-def children_shenanigans(ingredient):
-    print(f"As you make a beeline for the {ingredient}, a bunch of kids appear and begin to play around with the {ingredient}!")
-    print(f"You look around for their parents, but it appears they're nowhere within site.")
-    print(f"What do you do? \n 1. Try once more to look for the parents \n 2. Trip over the kids")
-    choice = input("Please type the number of your choice: ")
-    if choice == "1":
-        print(f"You look once more to find the parents. \n Hooray! You found them. \n They gather their kids and you're able to obtain the {ingredient}.")
-    elif choice == "2":
-        outcome = random.choice([f"You trip over the kids without them or anyone else noticing, and successfully obtain the {ingredient}!", "You trip over the kids, to which someone bears as a witness. \n An employee escorts you out the store."])
-    print(outcome)
-    if "escorts" in outcome:
-        print("Game Over. Someone reported you for tripping over children.")
-        return False
-    return True
-#ChildrenShenanigans_Obstacle
-def stalled_shopper(ingredient):
-    print(f"You make your way towards the {ingredient}, when you see someone standing in front of the section.")
-    print("The indivudal seems to be on there phone.")
-    print("What should you do? \n 1. Sneak around the individual and attempt to get the item \n 2. Ask the individual to move")
-    choice = input("Please type the number of your choice: ")
-    if choice == "1":
-        outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {ingredient}!"])
-    elif choice == "2":
-        print("You ask the individual to move politely and she happily obliges!")
-    if "pervert" in outcome:
-        print("Game Over. 911 was called on you and you were escorted out by police.")
-        return False
-    return True
-#StalledShopper_Obstacle  
-def revenge_storyline():
-    print("You spot the lady who took your cart from earlier.")
-    print("Should you take revenge? \n 1. Yes \n 2. No")
-    decision = input("Please type the number of your choice: ")
-    if decision == "1":
-        print("How do you want to take revenge? \n 1. Steal her cart when she isn't looking \n 2. Trip her")
-        choice = input("Please type the number of your choice: ")
-        if choice == "1":
-            print("You steal her cart when she isn't looking and succeed!")
-        elif choice == "2":
-            print("You attempt to trip her, but she notices your movement and trips you before you get the chance.")
-            print("Game Over. You leave the store out of embarrassment.")
-            return False
-        return True
-    elif decision == "2":
-        print("It wasn't that big of a deal. Let's gather those ingredients!")
-#RevengeStoryline_Special
 if __name__ == "__main__":
     main() 
 
