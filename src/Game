@@ -1,28 +1,4 @@
 import random
-import sys
-import pygame
-
-pygame.init()
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Dinner Disaster: Ingredient Hunt")
-
-background_color =(200,192,203)
-text_color = (0, 255, 0)
-
-font = pygame.font.SysFont("Gabriola", 30)
-
-def render_text(text, y_position):
-    text_surface = font.render(text, True, text_color)
-    screen.blit(text_surface, (50, y_position))
-
-current_text = []
-current_line = 0
-game_over = False
-text_to_display = ""
-text_index = 0
-typing_speed = 30
 
 def slow_print(text):
     global text_to_display, text_index
@@ -61,31 +37,6 @@ def given_list(meal):
     }
 
     return meal_items.get(meal, [])
-
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN:
-            if not game_over:
-                if event.key == pygame.K_RETURN:
-                    if current_line < len(current_text):
-                        current_line += 1
-                    else:
-                        game_over = True
-            else:
-                current_text.clear()
-                current_line = 0
-                game_over = False
-                main()
-    screen.fill(background_color)
-    for i in range(current_line):
-        render_text(current_text[i], 50 + i * 40)
-    pygame.display.flip()
-pygame.quit()
-sys.exit()
-
 # Calls list for the given meal chosen
 def the_obstacle(chosen_ingredient):
     obstacle = random.choice(["Slippery Situation", "Out of Stock", "Back of the Shelf", "Children Shenanigans", "Stalled Shopper"])
