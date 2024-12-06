@@ -18,6 +18,11 @@ RAINBOW_COLORS = [
 
 RESET = '\033[0m'
 
+YELLOW_BACKGROUND = "\033[43m"
+BLACK = "\033[30m"
+WHITE_BACKGROUND = "\033[47m"
+RESET = "\033[0m"
+
 def slow_print(text, delay=0.05):
     for char in text:
         print(char, end="", flush=True)
@@ -32,26 +37,26 @@ def rainbow_intro(title):
         time.sleep(0.1)
     sys.stdout.write(RESET + '\n')
 def print_smiley_face():
-    smiley_face = r"""
-          
+    smiley_face = f"""
+    {YELLOW_BACKGROUND}{BLACK}      
            ---------- 
           /          \  
          /  ^     ^   \  
         [   \______/   ] 
          \____________/  
-    """  
+    {RESET}"""  
     print(smiley_face)
 #SmileyDrawing
 def print_skull():
-    skull_face = r"""
-          
+    skull_face = fr"""
+    {WHITE_BACKGROUND}{BLACK}      
            ______________
-         /               \
+         /               \\
          \    []  []     /
-         /               \
+         /               \\
          \   [][][][]    /
           \_____________/   
-    """
+    {RESET}"""
     print(skull_face)
 #SkullDrawing   
 def main():
@@ -238,7 +243,7 @@ def revenge_storyline():
         slow_print("Invalid choice. Please try again.")
         return revenge_storyline()
 #RevengeStoryline_Special
-def choose_ingredient(meal, ingredients_left, revenge_triggered):
+def choose_ingredient(meal, ingredients_left, revenge_triggered, is_smiths_store):
     slow_print(f"Which ingredient would you like to collect for {meal}?")
     for idx, ingredient in enumerate(ingredients_left, start=1):
         slow_print(f"{idx}. {ingredient}")
@@ -258,66 +263,83 @@ def choose_ingredient(meal, ingredients_left, revenge_triggered):
         if obstacle_result is False:
             return None, ingredients_left, revenge_triggered
 
-        if not revenge_triggered and random.random() < 1/len(ingredients_left):
+        if is_smiths_store and not revenge_triggered and random.random() < 1/len(ingredients_left):
             revenge_triggered = True
             revenge_result = revenge_storyline()
             if revenge_result is False:
-                return None, ingredients_left, revenge_triggered
-            revenge_storyline()
+                return None, ingredients_left, revenge_triggered        
         return chosen_ingredient, ingredients_left, revenge_triggered
     else:
         slow_print("Invalid choice. Please choose a valid ingredient.")
         return choose_ingredient(meal, ingredients_left, revenge_triggered)
 #Player chooses which ingredient to obtain and lists ingredient list of remaining
-def continuing_ending(meal, ingredients_left):
+def collecting_mistake_finished(meal, ingredients_left, is_smiths_store):
     revenge_triggered = False
     while ingredients_left:
-        ingredient, ingredients_left, revenge_triggered = choose_ingredient(meal, ingredients_left, revenge_triggered)
+        ingredient, ingredients_left, revenge_triggered = choose_ingredient(meal, ingredients_left, revenge_triggered, is_smiths_store)
         if ingredient is None:
             slow_print("Game Over. You cannot continue.")
             return
         slow_print(f"Ingredients left to obtain: {ingredients_left}")
-    slow_print("Yay! All ingredients have been collected. Now, your friend can make dinner for you!")
+    rainbow_intro("Yay! All ingredients have been collected. Now, your friend can make dinner for you!")
 #Determines if game continues or ends (depending on ingredients gathered)
 def tacos_story(ingredients_needed):
     slow_print("Now, which grocery store should you go to?")
     slow_print("There seems to be three nearby you. \n Where should you go? \n 1. Oates \n 2. Smiths \n 3. Sacred")
     designated_store = input("Please type the number of your choice: ")
+    
+    is_smiths_store = False
+
     if designated_store == "1":
         slow_print("You chose: Oates!")
         oates()
     elif designated_store == "2":
         slow_print("You chose: Smiths!")
+        is_smiths_store = True
         smiths()
     elif designated_store == "3":
         slow_print("You chose: Sacred!") 
         sacred()
+    else:
+        slow_print("Invalid choice. Please try again.")
+        return tacos_story(ingredients_needed)
     ingredients_needed = given_list("TACOS")
-    continuing_ending("TACOS", ingredients_needed)
+    collecting_mistake_finished("TACOS", ingredients_needed, is_smiths_store)
 #Picks which store to heads towards (3)
 def hamburgers_story(ingredients_needed):
     slow_print("Now, which grocery store should you go to?")
     slow_print("...?")
     slow_print("Oh, there seems to be only ONE grocery store nearby you. \n Which is: \n Franks")
     slow_print("Franks it is!")
+    
+    is_smiths_store = False
+
     franks()
     ingredients_needed = given_list("HAMBURGERS")
-    continuing_ending("HAMBURGERS", ingredients_needed)
+    collecting_mistake_finished("HAMBURGERS", ingredients_needed, is_smiths_store)
 #Picks which store to heads towards (1)
 def spaghetti_story(ingredients_needed):
     slow_print("Now, which grocery store should you go to?")
     slow_print("There seems to be two nearby you. \n Where should you go? \n 1. Jacksons \n 2. Sundays")
     designated_store = input("Please type the number of your choice: ")
+    
+    is_smiths_store = False
+
     if designated_store == "1":
         slow_print("You chose: Jacksons!")
         jacksons()
     elif designated_store == "2":
         slow_print("You chose: Sundays!")
         sundays()
-        ingredients_needed = given_list("SPAGHETTI")
-        continuing_ending("SPAGHETTI", ingredients_needed)
+    else:
+        slow_print("Invalid choice. Please try again.")
+        return spaghetti_story(ingredients_needed)
+    ingredients_needed = given_list("SPAGHETTI")
+    collecting_mistake_finished("SPAGHETTI", ingredients_needed, is_smiths_store)
 #Picks which store to heads towards (2)
 def oates():
+    revenge_triggered = False
+    is_smiths_store = False
     slow_print("You arrive at the Oates grocery store.")
     slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
@@ -327,8 +349,12 @@ def oates():
         slow_print("You obtain a cart!")
     else:
         print("Invalid choice. Please enter 1 or 2.")
+        ingredients_needed = given_list("TACOS")
+        collecting_mistake_finished("TACOS", ingredients_needed, is_smiths_store)
 #Oates Storyline
 def smiths():
+    revenge_triggered = False
+    is_smiths_store = True
     slow_print("You arrive at the Smiths grocery store.")
     slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
@@ -337,10 +363,15 @@ def smiths():
     elif hold_item == "2":
         slow_print("You decide to grab a cart! You make haste to obtain one, as there is only one left.")
         slow_print("As you're about to grab the last one, a lady pushes you aside and takes the cart for herself. Shocked, you grab a basket instead as there is no time to waste.")
+        revenge_triggered = True
+        return revenge_storyline()
     else:
         slow_print("Invalid choice. Please enter 1 or 2.")
+    return revenge_triggered
 #Smiths Storyline
 def sacred():
+    revenge_triggered = False
+    is_smiths_store = False
     slow_print("You arrive at the Sacred grocery store.")
     slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
@@ -352,11 +383,15 @@ def sacred():
         slow_print("Invalid choice. Please enter 1 or 2.")
 #Sacred Storyline
 def franks():
+    revenge_triggered = False
+    is_smiths_store = False
     slow_print("You arrive at the Franks grocery store.")
     slow_print("Unfortunately, as you enter the store, you see that there are no options for you to carry your items.")
     slow_print("Looks like you'll have to make use of your hands...")
 #Franks Storyline
 def jacksons():
+    revenge_triggered = False
+    is_smiths_store = False
     slow_print("You arrive at the Jackons grocery store.")
     slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
@@ -368,6 +403,8 @@ def jacksons():
         slow_print("Invalid choice. Please enter 1 or 2.")
 #Jacksons Storyline
 def sundays():
+    revenge_triggered = False
+    is_smiths_store = False
     slow_print("You arrive at the Sundays grocery store.")
     slow_print("As you enter, you see two options for how you can carry your items. \n Your Options: \n 1. A Basket \n 2. A Cart")
     hold_item = input("Please type the number of your choice: ")
