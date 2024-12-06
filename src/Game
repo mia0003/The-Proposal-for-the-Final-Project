@@ -37,15 +37,15 @@ def print_skull():
     """
     print(skull_face)
 #SkullDrawing   
-def countdown(timer):
+def countdown(stop_timer):
     timer_started = time.time()
-    while not timer.is_set():
+    while not stop_timer.is_set():
         elapsed_time = int(time.time() - timer_started)
         sys.stdout.write(f"\rTime Remaining:{3 - elapsed_time} seconds")
         sys.stdout.flush()
         if elapsed_time >= 3:
-            timer.set()
-        time.sleep(1) 
+            stop_timer.set()
+        time.sleep(0.1) 
 def main():
     intro()
 # Calls Intro 
@@ -94,8 +94,8 @@ def the_obstacle(chosen_ingredient):
         return stalled_shopper(chosen_ingredient)
 #Obstacle paths
 def slippery_situation(chosen_ingredient):
-    timer = threading.Event()
-    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    stop_timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(stop_timer,))
     countdown_thread.daemon = True  
     countdown_thread.start()
     
@@ -106,14 +106,15 @@ def slippery_situation(chosen_ingredient):
     
     choice = None
     start_time = time.time()
-    while not timer.is_set():
+    while not stop_timer.is_set():
         if choice is None:
             choice = input("\nPlease type the number of your choice: ")
-        time.sleep(0.1)
-        if choice is None:
+        if time.time() - start_time > 3:
+            stop_timer.set()
             slow_print("\nTime's up! You failed to pick a choice in time.")
             print_skull()
             return False
+        time.sleep(0.1)
     
     if choice == "1":
         outcome = random.choice([f"You take small steps within the puddle and manage to obtain the {chosen_ingredient}!", "You attempt to make your way across the puddle but fall due to being overcautious!"])
@@ -127,7 +128,7 @@ def slippery_situation(chosen_ingredient):
         outcome = random.choice([f"You glide swiftly over the puddle and successfully obtain the {chosen_ingredient}!", "You attempt to glide over the puddle but fall and make yourself a fool in front of everyone. \nA few moments later an employee approaches you and asks you to leave the store as you caused a disturbance."])
         slow_print(outcome)
         if "disturbance" in outcome:
-            print_skull
+            print_skull()
             return False
         
     else:
@@ -135,8 +136,8 @@ def slippery_situation(chosen_ingredient):
         return slippery_situation(chosen_ingredient)
 #SlipperySituation_Obstacle
 def out_of_stock(chosen_ingredient):
-    timer = threading.Event()
-    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    stop_timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(stop_timer,))
     countdown_thread.daemon = True  
     countdown_thread.start()
 
@@ -148,14 +149,15 @@ def out_of_stock(chosen_ingredient):
     
     choice = None
     start_time = time.time()
-    while not timer.is_set():
+    while not stop_timer.is_set():
         if choice is None:
             choice = input("\nPlease type the number of your choice: ")
-        time.sleep(0.1)
-        if choice is None:
+        if time.time() - start_time > 3:
+            stop_timer.set()
             slow_print("\nTime's up! You failed to pick a choice in time.")
             print_skull()
             return False
+        time.sleep(0.1)
     
     if choice == "1":
         outcome = random.choice([f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... \n They come back with {chosen_ingredient}!", f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... and come back with nothing."])
@@ -178,8 +180,8 @@ def out_of_stock(chosen_ingredient):
         return out_of_stock(chosen_ingredient)
 #OutOfStock_Obstacle
 def back_of_the_shelf(chosen_ingredient):
-    timer = threading.Event()
-    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    stop_timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(stop_timer,))
     countdown_thread.daemon = True  
     countdown_thread.start()
 
@@ -191,15 +193,16 @@ def back_of_the_shelf(chosen_ingredient):
     
     choice = None
     start_time = time.time()
-    while not timer.is_set():
+    while not stop_timer.is_set():
+        if choice is None:
+            choice = input("\nPlease type the number of your choice: ")
         if time.time() - start_time > 3:
-            timer.set()
+            stop_timer.set()
             slow_print("\nTime's up! You failed to pick a choice in time.")
             print_skull()
             return False
-        if choice is None:
-            choice = input("\nPlease type the number of your choice: ")
         time.sleep(0.1)
+
     if choice == "1":
         slow_print(f"You ask, and the tall individual happily obliges. They hand you the {chosen_ingredient}!")
         print_smiley_face()
@@ -215,8 +218,8 @@ def back_of_the_shelf(chosen_ingredient):
         return back_of_the_shelf(chosen_ingredient)
 #BackOfTheShelf_Obstacle
 def children_shenanigans(chosen_ingredient):
-    timer = threading.Event()
-    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    stop_timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(stop_timer,))
     countdown_thread.daemon = True  
     countdown_thread.start()
 
@@ -228,14 +231,15 @@ def children_shenanigans(chosen_ingredient):
     
     choice = None
     start_time = time.time()
-    while not timer.is_set():
+    while not stop_timer.is_set():
         if choice is None:
             choice = input("\nPlease type the number of your choice: ")
-        time.sleep(0.1)
-        if choice is None:
+        if time.time() - start_time > 3:
+            stop_timer.set()
             slow_print("\nTime's up! You failed to pick a choice in time.")
             print_skull()
             return False
+        time.sleep(0.1)
 
     if choice == "1":
         slow_print(f"You look once more to find the parents. \nHooray! You found them. \nThey gather their kids and you're able to obtain the {chosen_ingredient}.")
@@ -252,8 +256,8 @@ def children_shenanigans(chosen_ingredient):
         return children_shenanigans(chosen_ingredient)
 #ChildrenShenanigans_Obstacle
 def stalled_shopper(chosen_ingredient):
-    timer = threading.Event()
-    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    stop_timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(stop_timer,))
     countdown_thread.daemon = True  
     countdown_thread.start()
 
@@ -265,14 +269,15 @@ def stalled_shopper(chosen_ingredient):
     
     choice = None
     start_time = time.time()
-    while not timer.is_set():
+    while not stop_timer.is_set():
         if choice is None:
             choice = input("\nPlease type the number of your choice: ")
-        time.sleep(0.1)
-        if choice is None:
+        if time.time() - start_time > 3:
+            stop_timer.set()
             slow_print("\nTime's up! You failed to pick a choice in time.")
             print_skull()
             return False
+        time.sleep(0.1)
 
     if choice == "1":
         outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {chosen_ingredient}!"])
@@ -289,11 +294,6 @@ def stalled_shopper(chosen_ingredient):
         return stalled_shopper(chosen_ingredient)
 #StalledShopper_Obstacle  
 def revenge_storyline():
-    timer = threading.Event()
-    countdown_thread = threading.Thread(target=countdown, args=(timer,))
-    countdown_thread.daemon = True  
-    countdown_thread.start()
-
     slow_print("You spot the lady who took your cart from earlier.")
     slow_print("Should you take revenge? \n1. Yes \n2. No")
     decision = input("Please type the number of your choice: ")
