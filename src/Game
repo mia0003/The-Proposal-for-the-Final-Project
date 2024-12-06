@@ -1,6 +1,7 @@
 import random
 import time
-
+import sys
+import threading
 text_to_display = ""
 text_index = 0
 
@@ -35,7 +36,16 @@ def print_skull():
           \_____________/   
     """
     print(skull_face)
-#SkullDrawing    
+#SkullDrawing   
+def countdown(timer):
+    timer_started = time.time()
+    while not timer.is_set():
+        elapsed_time = int(time.time() - timer_started)
+        sys.stdout.write(f"\rTime Remaining:{3 - elapsed_time} seconds")
+        sys.stdout.flush()
+        if elapsed_time >= 3:
+            timer.set()
+        time.sleep(1) 
 def main():
     intro()
 # Calls Intro 
@@ -84,11 +94,27 @@ def the_obstacle(chosen_ingredient):
         return stalled_shopper(chosen_ingredient)
 #Obstacle paths
 def slippery_situation(chosen_ingredient):
+    timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    countdown_thread.daemon = True  
+    countdown_thread.start()
+    
     slow_print(f"As you're making your way towards the {chosen_ingredient}, you see a large puddle blocking your path. ")
     slow_print("It is unavoidable. How do you overcome this obstacle?")
     slow_print("1. Walk through the puddle carefully")
     slow_print("2. Glide amongst the puddle")
-    choice = input("Please type the number of your choice: ")
+    
+    choice = None
+    start_time = time.time()
+    while not timer.is_set():
+        if choice is None:
+            choice = input("\nPlease type the number of your choice: ")
+        time.sleep(0.1)
+        if choice is None:
+            slow_print("\nTime's up! You failed to pick a choice in time.")
+            print_skull()
+            return False
+    
     if choice == "1":
         outcome = random.choice([f"You take small steps within the puddle and manage to obtain the {chosen_ingredient}!", "You attempt to make your way across the puddle but fall due to being overcautious!"])
         slow_print(outcome)
@@ -109,12 +135,28 @@ def slippery_situation(chosen_ingredient):
         return slippery_situation(chosen_ingredient)
 #SlipperySituation_Obstacle
 def out_of_stock(chosen_ingredient):
+    timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    countdown_thread.daemon = True  
+    countdown_thread.start()
+
     slow_print(f"You're in the right section for the {chosen_ingredient}, but you're not seeing it in its location.")
     slow_print(f"As you're looking around to see if it was misplaced, you see an employee nearby you as well as a shopper with the item in their cart.")
     slow_print(f"What should you do?")
     slow_print("1. Ask the employee about the item") 
     slow_print("2. Distract the shopper and snatch the ingredient from their cart")
-    choice = input("Please type the number of your choice: ")
+    
+    choice = None
+    start_time = time.time()
+    while not timer.is_set():
+        if choice is None:
+            choice = input("\nPlease type the number of your choice: ")
+        time.sleep(0.1)
+        if choice is None:
+            slow_print("\nTime's up! You failed to pick a choice in time.")
+            print_skull()
+            return False
+    
     if choice == "1":
         outcome = random.choice([f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... \n They come back with {chosen_ingredient}!", f"You approach the employee and ask if they have anymore {chosen_ingredient} in the back. \n They go check in the back... and come back with nothing."])
         if "nothing" in outcome:
@@ -136,12 +178,28 @@ def out_of_stock(chosen_ingredient):
         return out_of_stock(chosen_ingredient)
 #OutOfStock_Obstacle
 def back_of_the_shelf(chosen_ingredient):
+    timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    countdown_thread.daemon = True  
+    countdown_thread.start()
+
     slow_print(f"You attempt to reach for the {chosen_ingredient}, when you realize your height may be the problem.")
     slow_print(f"Looking around, you see a very tall individual and a step stool that you believe is used by employees.")
     slow_print(f"How will you choose to overcome this obstacle?")
     slow_print("1. Ask the tall individual if they can grab the item for you")
     slow_print("2. Attempt to use the step stool")
-    choice = input("Please type the number of your choice: ")
+    
+    choice = None
+    start_time = time.time()
+    while not timer.is_set():
+        if time.time() - start_time > 3:
+            timer.set()
+            slow_print("\nTime's up! You failed to pick a choice in time.")
+            print_skull()
+            return False
+        if choice is None:
+            choice = input("\nPlease type the number of your choice: ")
+        time.sleep(0.1)
     if choice == "1":
         slow_print(f"You ask, and the tall individual happily obliges. They hand you the {chosen_ingredient}!")
         print_smiley_face()
@@ -157,12 +215,28 @@ def back_of_the_shelf(chosen_ingredient):
         return back_of_the_shelf(chosen_ingredient)
 #BackOfTheShelf_Obstacle
 def children_shenanigans(chosen_ingredient):
+    timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    countdown_thread.daemon = True  
+    countdown_thread.start()
+
     slow_print(f"As you make a beeline for the {chosen_ingredient}, a bunch of kids appear and begin to play around with it!")
     slow_print(f"You look around for their parents, but it appears they're nowhere within sight.")
     slow_print(f"What do you do?")
     slow_print("1. Try once more to look for the parents") 
     slow_print("2. Trip over the kids")
-    choice = input("Please type the number of your choice: ")
+    
+    choice = None
+    start_time = time.time()
+    while not timer.is_set():
+        if choice is None:
+            choice = input("\nPlease type the number of your choice: ")
+        time.sleep(0.1)
+        if choice is None:
+            slow_print("\nTime's up! You failed to pick a choice in time.")
+            print_skull()
+            return False
+
     if choice == "1":
         slow_print(f"You look once more to find the parents. \nHooray! You found them. \nThey gather their kids and you're able to obtain the {chosen_ingredient}.")
         print_smiley_face()
@@ -178,12 +252,28 @@ def children_shenanigans(chosen_ingredient):
         return children_shenanigans(chosen_ingredient)
 #ChildrenShenanigans_Obstacle
 def stalled_shopper(chosen_ingredient):
+    timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    countdown_thread.daemon = True  
+    countdown_thread.start()
+
     slow_print(f"You make your way towards the {chosen_ingredient}, when you see someone standing in front of the section.")
     slow_print("The indivudal seems to be on their phone.")
     slow_print("What should you do?")
     slow_print("1. Sneak around the individual and attempt to get the item") 
     slow_print("2. Ask the individual to move")
-    choice = input("Please type the number of your choice: ")
+    
+    choice = None
+    start_time = time.time()
+    while not timer.is_set():
+        if choice is None:
+            choice = input("\nPlease type the number of your choice: ")
+        time.sleep(0.1)
+        if choice is None:
+            slow_print("\nTime's up! You failed to pick a choice in time.")
+            print_skull()
+            return False
+
     if choice == "1":
         outcome = random.choice([f"You attempt to sneak around the individual, but they notice you and take you as a pervert.", f"You sneak around the individual successfully and collect the {chosen_ingredient}!"])
         slow_print(outcome)
@@ -199,6 +289,11 @@ def stalled_shopper(chosen_ingredient):
         return stalled_shopper(chosen_ingredient)
 #StalledShopper_Obstacle  
 def revenge_storyline():
+    timer = threading.Event()
+    countdown_thread = threading.Thread(target=countdown, args=(timer,))
+    countdown_thread.daemon = True  
+    countdown_thread.start()
+
     slow_print("You spot the lady who took your cart from earlier.")
     slow_print("Should you take revenge? \n1. Yes \n2. No")
     decision = input("Please type the number of your choice: ")
