@@ -1,5 +1,4 @@
 # The-Proposal-for-the-Final-Project
-
 ## Repository
 <Link to your project's public GitHub respository> -> https://github.com/mia0003/The-Proposal-for-the-Final-Project.gi
 
