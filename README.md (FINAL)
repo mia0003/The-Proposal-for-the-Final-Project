@@ -1,6 +1,6 @@
 # Dinner Disaster: Ingredient Hunt
 ## URL for Demonstration:
-
+**Provided on elearning
 ## Description/Explanation:
 In this game, you collect ingredients in a grocery store and face many obstacles. There are multiple outcomes, so your input can result in a different outcome. You can get three meal options: tacos, spaghetti, or hamburgers. Depending on the meal you get, it either gives you a more extended playthrough or a shorter one (as the ingredients vary for each meal).
 Initially, when planning on making the game, I said I would do a time module, but I faced some issues and had to replace that idea. With that, I learned the slow_print function in which my game writes it along as it is being coded, and I did a rainbow feature on the text specific to the title and the text in which you complete the game!
